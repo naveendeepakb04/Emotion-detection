@@ -1,5 +1,6 @@
-import asyncio
-from asyncio import WindowsSelectorEventLoopPolicy
+# import asyncio
+# from asyncio import WindowsSelectorEventLoopPolicy
+import asyncio, sys
 from flask import Flask, render_template, request, jsonify
 import g4f
 from deepface import DeepFace
@@ -9,8 +10,12 @@ from collections import Counter
 import threading
 import time
 
+
+if sys.platform == "win32":
+    from asyncio import WindowsSelectorEventLoopPolicy
+    asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
 # Set the event loop policy for Windows (if applicable)
-asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
+# asyncio.set_event_loop_policy(WindowsSelectorEventLoopPolicy())
 
 app = Flask(__name__)
 
